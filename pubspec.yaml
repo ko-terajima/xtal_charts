@@ -1,0 +1,45 @@
+name: xtal_charts
+description: >-
+  A comprehensive Flutter charting library with Area, Bar, Column, Heatmap,
+  Sunburst, Dual-Axes, and Horizontal Bar charts. Features interactive
+  tooltips, smooth animations, and customizable themes.
+version: 0.0.2
+homepage: https://github.com/ko-terajima/xtal_charts
+repository: https://github.com/ko-terajima/xtal_charts
+issue_tracker: https://github.com/ko-terajima/xtal_charts/issues
+topics:
+  - charts
+  - flutter
+  - visualization
+  - data-visualization
+
+screenshots:
+  - description: 'Area Chart with gradient fill and smooth curves'
+    path: screenshots/area_chart.png
+  - description: 'Bar Chart with grouped series'
+    path: screenshots/bar_chart.png
+  - description: 'Column Chart with stacked mode'
+    path: screenshots/column_chart.png
+  - description: 'Dual Axes Chart combining column and line'
+    path: screenshots/dual_axes_chart.png
+  - description: 'Heatmap Chart with color scale legend'
+    path: screenshots/heatmap_chart.png
+  - description: 'Horizontal Bar Chart'
+    path: screenshots/horizontal_bar_chart.png
+  - description: 'Sunburst Chart with drill-down'
+    path: screenshots/sunburst_chart.png
+  - description: 'Calendar Heatmap'
+    path: screenshots/calendar_heatmap.png
+
+environment:
+  sdk: ^3.10.4
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
