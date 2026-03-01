@@ -1,3 +1,10 @@
+## 0.1.1
+
+* Fix axis title and axis label overlap on all chart types.
+* Fix axis labels wrapping to multiple lines (enforce single-line rendering).
+* Fix DualAxes right Y-axis title overlapping with labels.
+* Increase axis title padding (20px → 24px) and X-axis title offset (22px → 26px).
+
 ## 0.1.0
 
 * Initial release.

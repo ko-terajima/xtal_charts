@@ -3,7 +3,7 @@ description: >-
   A comprehensive Flutter charting library with Area, Bar, Column, Heatmap,
   Sunburst, Dual-Axes, and Horizontal Bar charts. Features interactive
   tooltips, smooth animations, and customizable themes.
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/ko-terajima/crystal_charts
 repository: https://github.com/ko-terajima/crystal_charts
 issue_tracker: https://github.com/ko-terajima/crystal_charts/issues

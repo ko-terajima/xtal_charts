@@ -31,7 +31,7 @@ Supports 7 chart types for building data visualization dashboards.
 
 ```yaml
 dependencies:
-  crystal_charts: ^0.1.0
+  crystal_charts: ^0.1.1
 ```
 
 ```bash
