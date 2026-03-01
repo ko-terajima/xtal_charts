@@ -92,6 +92,9 @@ class BarChart extends StatefulWidget {
   /// Base text style. Takes priority over the theme's textStyle.
   final TextStyle? textStyle;
 
+  /// Whether to rotate X-axis labels vertically (-90 degrees).
+  final bool rotateXAxisLabels;
+
   const BarChart({
     super.key,
     required this.seriesList,
@@ -110,6 +113,7 @@ class BarChart extends StatefulWidget {
     this.valueScale = ValueScale.none,
     this.useThousandsSeparator = true,
     this.textStyle,
+    this.rotateXAxisLabels = false,
   });
 
   @override
@@ -201,6 +205,13 @@ class _BarChartState extends State<BarChart>
       theme: widget.theme,
       xAxisTitle: widget.xAxisTitle,
       yAxisTitle: widget.yAxisTitle,
+      yScale: _yScale,
+      baseTextStyle: widget.textStyle,
+      unit: widget.unit,
+      unitPosition: widget.unitPosition,
+      valueScale: widget.valueScale,
+      useThousandsSeparator: widget.useThousandsSeparator,
+      rotateXAxisLabels: widget.rotateXAxisLabels,
     );
 
     final renderBox = context.findRenderObject() as RenderBox?;
@@ -361,6 +372,7 @@ class _BarChartState extends State<BarChart>
                         unitPosition: widget.unitPosition,
                         valueScale: widget.valueScale,
                         useThousandsSeparator: widget.useThousandsSeparator,
+                        rotateXAxisLabels: widget.rotateXAxisLabels,
                       ),
                     );
                   },
