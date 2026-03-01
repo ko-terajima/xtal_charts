@@ -31,7 +31,7 @@ Supports 7 chart types for building data visualization dashboards.
 
 ```yaml
 dependencies:
-  xtal_charts: ^0.0.2
+  xtal_charts: ^0.1.0
 ```
 
 ```bash

@@ -743,7 +743,6 @@ class _SalesDashboardDemoPageState extends State<SalesDashboardDemoPage> {
                 );
               },
               colorScale: HeatmapColorScale.fromColor(Colors.red),
-              pageScrollThreshold: 0.8,
               colorLegendPosition: LegendPosition.right,
             ),
           ],

@@ -676,7 +676,7 @@ class DualAxesPainter extends BaseChartPainter {
     canvas.save();
     final centerY = plotArea.top + plotArea.height / 2;
     canvas.translate(textPainter.height / 2 + 2, centerY);
-    canvas.rotate(-3.1415926535 / 2);
+    canvas.rotate(-pi / 2);
 
     final startX = -totalWidth / 2;
     if (hasIndicator) {
@@ -712,7 +712,7 @@ class DualAxesPainter extends BaseChartPainter {
         theme.showYAxisLabels ? _defaultRightPaddingPx : _reducedRightPaddingPx;
     final titleX = plotArea.right + basePadding - 2;
     canvas.translate(titleX, centerY);
-    canvas.rotate(3.1415926535 / 2);
+    canvas.rotate(pi / 2);
 
     final startX = -totalWidth / 2;
     if (hasIndicator) {

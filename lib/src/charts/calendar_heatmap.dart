@@ -103,13 +103,6 @@ class CalendarHeatmap extends StatefulWidget {
   /// Does not affect color normalization (display only).
   final double? legendDisplayMinValue;
 
-  /// Whether to enable month navigation via scrolling.
-  final bool enablePageScroll;
-
-  /// Drag distance threshold for page switching (0.1 to 0.9).
-  /// Ratio relative to viewport height. Larger values make switching harder.
-  final double pageScrollThreshold;
-
   const CalendarHeatmap({
     super.key,
     required this.data,
@@ -134,8 +127,6 @@ class CalendarHeatmap extends StatefulWidget {
     this.cellRowMinHeight,
     this.colorLegendPosition = LegendPosition.bottom,
     this.legendDisplayMinValue,
-    this.enablePageScroll = true,
-    this.pageScrollThreshold = 0.4,
   });
 
   @override
@@ -443,9 +434,6 @@ class _CalendarHeatmapState extends State<CalendarHeatmap>
       child: PageView.builder(
         controller: _pageController,
         scrollDirection: Axis.vertical,
-        // TODO(bug): Snap-scroll month navigation is temporarily disabled due to a bug.
-        // Deadlock and rapid consecutive snap issues with AbsorbPointer are unresolved.
-        // Restore the widget.enablePageScroll conditional branch after fixing.
         physics: const NeverScrollableScrollPhysics(),
         onPageChanged: _onPageChanged,
         itemCount: 3,
@@ -1423,82 +1411,4 @@ class _DefaultCalendarTooltip extends StatelessWidget {
       ),
     );
   }
-}
-
-// ---------------------------------------------------------------------------
-// Custom ScrollPhysics: controls page switch threshold
-// ---------------------------------------------------------------------------
-
-/// Provides snap behavior equivalent to [PageScrollPhysics],
-/// while controlling the drag ratio required for page switching via [pageSwitchThreshold].
-// ignore: unused_element
-class _CalendarPageScrollPhysics extends ScrollPhysics {
-  final double pageSwitchThreshold;
-
-  const _CalendarPageScrollPhysics({
-    super.parent,
-    this.pageSwitchThreshold = 0.4,
-  });
-
-  @override
-  _CalendarPageScrollPhysics applyTo(ScrollPhysics? ancestor) {
-    return _CalendarPageScrollPhysics(
-      parent: buildParent(ancestor),
-      pageSwitchThreshold: pageSwitchThreshold,
-    );
-  }
-
-  double _getPage(ScrollMetrics position) {
-    return position.pixels / position.viewportDimension;
-  }
-
-  double _getTargetPage(ScrollMetrics position, double velocity) {
-    final page = _getPage(position);
-    final currentPage = page.truncateToDouble();
-    final pageFraction = page - currentPage;
-    final tolerance = toleranceFor(position);
-
-    // If velocity is high enough, transition in that direction
-    if (velocity < -tolerance.velocity) {
-      return (pageFraction > 0.01) ? currentPage + 1.0 : currentPage;
-    }
-    if (velocity > tolerance.velocity) {
-      return currentPage;
-    }
-
-    // If velocity is low, decide based on threshold
-    if (pageFraction >= pageSwitchThreshold) {
-      return currentPage + 1.0;
-    }
-    return currentPage;
-  }
-
-  @override
-  Simulation? createBallisticSimulation(
-    ScrollMetrics position,
-    double velocity,
-  ) {
-    if ((velocity <= 0.0 && position.pixels <= position.minScrollExtent) ||
-        (velocity >= 0.0 && position.pixels >= position.maxScrollExtent)) {
-      return super.createBallisticSimulation(position, velocity);
-    }
-
-    final target =
-        _getTargetPage(position, velocity) * position.viewportDimension;
-
-    if ((target - position.pixels).abs() < toleranceFor(position).distance) {
-      return null;
-    }
-
-    return ScrollSpringSimulation(
-      spring,
-      position.pixels,
-      target,
-      velocity,
-      tolerance: toleranceFor(position),
-    );
-  }
-
-  @override
-  bool get allowImplicitScrolling => false;
 }

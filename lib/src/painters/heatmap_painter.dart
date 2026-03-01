@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -338,7 +339,7 @@ class HeatmapPainter extends BaseChartPainter {
     canvas.save();
     final centerY = plotArea.top + plotArea.height / 2;
     canvas.translate(painter.height / 2 + 2, centerY);
-    canvas.rotate(-3.1415926535 / 2);
+    canvas.rotate(-pi / 2);
     painter.paint(canvas, Offset(-painter.width / 2, -painter.height / 2));
     canvas.restore();
   }

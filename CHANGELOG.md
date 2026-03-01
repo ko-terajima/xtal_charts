@@ -1,8 +1,4 @@
-## 0.0.2
-
-* Removed hardcoded internal data from the example.
-
-## 0.0.1 (retracted)
+## 0.1.0
 
 * Initial release.
 * **Area Chart** — Gradient-filled area chart with smooth curve support.
@@ -14,7 +10,3 @@
 * **Sunburst Chart** — Sunburst chart with drill-down support.
 * **Calendar Heatmap** — High-performance calendar heatmap based on Canvas (`CustomPainter`).
 * **Common features**: Hover tooltips, animations, customizable themes (light/dark), value formatter (unit, scaling, thousands separator).
-
-### Known Limitations
-
-* **Calendar Heatmap**: Snap-scroll month navigation is currently disabled (planned for a future release).
