@@ -26,7 +26,7 @@ const _topPaddingPx = 16.0;
 const _rightPaddingPx = 16.0;
 
 /// Additional padding when axis titles are shown (px).
-const _axisTitlePaddingPx = 20.0;
+const _axisTitlePaddingPx = 24.0;
 
 /// Painter that draws an Ant Design Charts style column chart on Canvas.
 ///
@@ -308,11 +308,15 @@ class ColumnChartPainter extends BaseChartPainter {
               plotArea.height;
 
       final text = formatChartValue(tick, unit: unit, unitPosition: unitPosition, valueScale: valueScale, useThousandsSeparator: useThousandsSeparator);
+      final labelAreaWidth =
+          theme.showYAxisLabels ? _defaultLeftPaddingPx : _reducedLeftPaddingPx;
       final painter = TextPainter(
         text: TextSpan(text: text, style: resolveStyle(theme.labelStyle)),
         textDirection: TextDirection.ltr,
         textAlign: TextAlign.right,
-      )..layout(maxWidth: _leftPadding - 8);
+        maxLines: 1,
+        ellipsis: '\u2026',
+      )..layout(maxWidth: labelAreaWidth - 8);
 
       painter.paint(
         canvas,
@@ -342,6 +346,7 @@ class ColumnChartPainter extends BaseChartPainter {
         text: TextSpan(text: label, style: resolveStyle(theme.labelStyle)),
         textDirection: TextDirection.ltr,
         textAlign: TextAlign.center,
+        maxLines: 1,
       )..layout();
 
       painter.paint(
@@ -362,7 +367,7 @@ class ColumnChartPainter extends BaseChartPainter {
     )..layout();
 
     final x = plotArea.left + (plotArea.width - painter.width) / 2;
-    final y = plotArea.bottom + (theme.showXAxisLabels ? 22.0 : 4.0);
+    final y = plotArea.bottom + (theme.showXAxisLabels ? 26.0 : 4.0);
     painter.paint(canvas, Offset(x, y));
   }
 

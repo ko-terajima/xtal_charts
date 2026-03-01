@@ -17,7 +17,7 @@ const _topPaddingPx = 16.0;
 const _rightPaddingPx = 16.0;
 
 /// Additional padding when axis titles are shown (px).
-const _axisTitlePaddingPx = 20.0;
+const _axisTitlePaddingPx = 24.0;
 
 /// Painter that renders an Ant Design Charts style bar chart on the Canvas.
 ///
@@ -231,6 +231,8 @@ class BarChartPainter extends BaseChartPainter {
         text: TextSpan(text: text, style: resolveStyle(theme.labelStyle)),
         textDirection: TextDirection.ltr,
         textAlign: TextAlign.right,
+        maxLines: 1,
+        ellipsis: '\u2026',
       )..layout(maxWidth: _defaultLeftPaddingPx - 8);
 
       painter.paint(
@@ -261,6 +263,7 @@ class BarChartPainter extends BaseChartPainter {
         text: TextSpan(text: label, style: resolveStyle(theme.labelStyle)),
         textDirection: TextDirection.ltr,
         textAlign: TextAlign.center,
+        maxLines: 1,
       )..layout();
 
       painter.paint(
@@ -281,7 +284,7 @@ class BarChartPainter extends BaseChartPainter {
     )..layout();
 
     final x = plotArea.left + (plotArea.width - painter.width) / 2;
-    final y = plotArea.bottom + (theme.showXAxisLabels ? 22.0 : 4.0);
+    final y = plotArea.bottom + (theme.showXAxisLabels ? 26.0 : 4.0);
     painter.paint(canvas, Offset(x, y));
   }
 

@@ -25,7 +25,7 @@ const _reducedLeftPaddingPx = 16.0;
 const _reducedBottomPaddingPx = 32.0;
 
 /// Additional padding (px) when axis titles are shown.
-const _axisTitlePaddingPx = 20.0;
+const _axisTitlePaddingPx = 24.0;
 
 /// Painter that renders an Ant Design Charts-style heatmap on a Canvas.
 ///
@@ -272,6 +272,8 @@ class HeatmapPainter extends BaseChartPainter {
         ),
         textDirection: TextDirection.ltr,
         textAlign: TextAlign.right,
+        maxLines: 1,
+        ellipsis: '\u2026',
       )..layout(maxWidth: _defaultLeftPaddingPx - 8);
 
       painter.paint(
@@ -302,6 +304,7 @@ class HeatmapPainter extends BaseChartPainter {
         ),
         textDirection: TextDirection.ltr,
         textAlign: TextAlign.center,
+        maxLines: 1,
       )..layout();
 
       painter.paint(
@@ -322,7 +325,7 @@ class HeatmapPainter extends BaseChartPainter {
     )..layout();
 
     final x = plotArea.left + (plotArea.width - painter.width) / 2;
-    final y = plotArea.bottom + (theme.showXAxisLabels ? 22.0 : 4.0);
+    final y = plotArea.bottom + (theme.showXAxisLabels ? 26.0 : 4.0);
     painter.paint(canvas, Offset(x, y));
   }
 

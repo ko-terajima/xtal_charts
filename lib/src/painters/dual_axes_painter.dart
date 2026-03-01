@@ -35,7 +35,7 @@ const _reducedBottomPaddingPx = 8.0;
 const _reducedRightPaddingPx = 12.0;
 
 /// Additional padding when axis titles are shown (px).
-const _axisTitlePaddingPx = 20.0;
+const _axisTitlePaddingPx = 24.0;
 
 /// Painter that draws an Ant Design Charts style dual-axis chart on Canvas.
 ///
@@ -266,6 +266,8 @@ class DualAxesPainter extends BaseChartPainter {
         text: TextSpan(text: text, style: resolveStyle(theme.labelStyle)),
         textDirection: TextDirection.ltr,
         textAlign: TextAlign.right,
+        maxLines: 1,
+        ellipsis: '\u2026',
       )..layout(maxWidth: _defaultLeftPaddingPx - 8);
 
       painter.paint(
@@ -288,6 +290,8 @@ class DualAxesPainter extends BaseChartPainter {
         text: TextSpan(text: text, style: resolveStyle(theme.labelStyle)),
         textDirection: TextDirection.ltr,
         textAlign: TextAlign.left,
+        maxLines: 1,
+        ellipsis: '\u2026',
       )..layout(maxWidth: _defaultRightPaddingPx - 8);
 
       painter.paint(
@@ -319,6 +323,7 @@ class DualAxesPainter extends BaseChartPainter {
         text: TextSpan(text: label, style: resolveStyle(theme.labelStyle)),
         textDirection: TextDirection.ltr,
         textAlign: TextAlign.center,
+        maxLines: 1,
       )..layout();
 
       painter.paint(
@@ -653,7 +658,7 @@ class DualAxesPainter extends BaseChartPainter {
     )..layout();
 
     final x = plotArea.left + (plotArea.width - painter.width) / 2;
-    final y = plotArea.bottom + (theme.showXAxisLabels ? 22.0 : 4.0);
+    final y = plotArea.bottom + (theme.showXAxisLabels ? 26.0 : 4.0);
     painter.paint(canvas, Offset(x, y));
   }
 
@@ -708,9 +713,7 @@ class DualAxesPainter extends BaseChartPainter {
 
     canvas.save();
     final centerY = plotArea.top + plotArea.height / 2;
-    final basePadding =
-        theme.showYAxisLabels ? _defaultRightPaddingPx : _reducedRightPaddingPx;
-    final titleX = plotArea.right + basePadding - 2;
+    final titleX = plotArea.right + _rightPadding - textPainter.height / 2 - 2;
     canvas.translate(titleX, centerY);
     canvas.rotate(pi / 2);
 
