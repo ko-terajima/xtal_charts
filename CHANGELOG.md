@@ -1,3 +1,7 @@
+## 0.1.2
+
+* Change calendar heatmap month selector labels from English abbreviations (Jan–Dec) to numeric (1–12).
+
 ## 0.1.1
 
 * Fix axis title and axis label overlap on all chart types.

@@ -653,23 +653,7 @@ class _CalendarHeatmapState extends State<CalendarHeatmap>
 // Header: Navigation arrows + year/month selectors
 // ---------------------------------------------------------------------------
 
-const _monthAbbreviations = [
-  '',
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec',
-];
-
-String _monthAbbr(int month) => _monthAbbreviations[month];
+String _monthAbbr(int month) => '$month';
 
 class _CalendarHeatmapHeader extends StatelessWidget {
   final int year;
