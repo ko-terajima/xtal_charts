@@ -1,4 +1,4 @@
-import 'package:xtalcharts/src/utils/nice_numbers.dart';
+import 'package:crystal_charts/src/utils/nice_numbers.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

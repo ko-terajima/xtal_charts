@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:xtalcharts/xtalcharts.dart';
+import 'package:crystal_charts/crystal_charts.dart';
 
 /// Simple tree data for testing.
 ChartTreeNode _simpleTree() => ChartTreeNode(

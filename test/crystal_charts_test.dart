@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:xtalcharts/xtalcharts.dart';
+import 'package:crystal_charts/crystal_charts.dart';
 
 void main() {
   group('ChartDataPoint', () {

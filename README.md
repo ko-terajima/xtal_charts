@@ -1,6 +1,6 @@
-# xtalcharts
+# crystal_charts
 
-[![pub package](https://img.shields.io/pub/v/xtalcharts.svg)](https://pub.dev/packages/xtalcharts)
+[![pub package](https://img.shields.io/pub/v/crystal_charts.svg)](https://pub.dev/packages/crystal_charts)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 A comprehensive Flutter charting library with rich animations, interactive tooltips, and customizable themes.
@@ -31,7 +31,7 @@ Supports 7 chart types for building data visualization dashboards.
 
 ```yaml
 dependencies:
-  xtalcharts: ^0.1.0
+  crystal_charts: ^0.1.0
 ```
 
 ```bash
@@ -41,7 +41,7 @@ flutter pub get
 ## Quick Start
 
 ```dart
-import 'package:xtalcharts/xtalcharts.dart';
+import 'package:crystal_charts/crystal_charts.dart';
 
 // Area Chart
 AreaChart(
