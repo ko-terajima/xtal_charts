@@ -1,6 +1,6 @@
-# xtal_charts
+# xtal_chart
 
-[![pub package](https://img.shields.io/pub/v/xtal_charts.svg)](https://pub.dev/packages/xtal_charts)
+[![pub package](https://img.shields.io/pub/v/xtal_chart.svg)](https://pub.dev/packages/xtal_chart)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 A comprehensive Flutter charting library with rich animations, interactive tooltips, and customizable themes.
@@ -31,7 +31,7 @@ Supports 7 chart types for building data visualization dashboards.
 
 ```yaml
 dependencies:
-  xtal_charts: ^0.1.0
+  xtal_chart: ^0.1.0
 ```
 
 ```bash
@@ -41,7 +41,7 @@ flutter pub get
 ## Quick Start
 
 ```dart
-import 'package:xtal_charts/xtal_charts.dart';
+import 'package:xtal_chart/xtal_chart.dart';
 
 // Area Chart
 AreaChart(

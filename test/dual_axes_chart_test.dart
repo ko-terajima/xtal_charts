@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:xtal_charts/xtal_charts.dart';
+import 'package:xtal_chart/xtal_chart.dart';
 
 /// Test data for the left axis (column).
 List<ChartSeries> _leftColumnSeries() => [

@@ -1,4 +1,4 @@
-import 'package:xtal_charts/src/utils/monotone_spline.dart';
+import 'package:xtal_chart/src/utils/monotone_spline.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
