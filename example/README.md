@@ -1,6 +1,6 @@
-# xtal_chart example
+# xtalcharts example
 
-A usage example for the `xtal_chart` package.
+A usage example for the `xtalcharts` package.
 This is a sales analytics dashboard that demonstrates multiple chart types with sample data.
 
 ## How to run

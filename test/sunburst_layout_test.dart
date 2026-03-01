@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:xtal_chart/xtal_chart.dart';
+import 'package:xtalcharts/xtalcharts.dart';
 
 /// 3-level tree for testing:
 ///   root (total=100)

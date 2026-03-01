@@ -1,4 +1,4 @@
-/// xtal_chart - A comprehensive Flutter charting library.
+/// xtalcharts - A comprehensive Flutter charting library.
 library;
 
 // Models

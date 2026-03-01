@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:xtal_chart/xtal_chart.dart';
+import 'package:xtalcharts/xtalcharts.dart';
 
 void main() {
   group('ChartTreeNode', () {

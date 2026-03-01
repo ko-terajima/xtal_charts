@@ -2,7 +2,7 @@ import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:xtal_chart/xtal_chart.dart';
+import 'package:xtalcharts/xtalcharts.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +15,7 @@ class ExampleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'xtal_chart Demo',
+      title: 'xtalcharts Demo',
       theme: ThemeData.dark().copyWith(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.indigo,
