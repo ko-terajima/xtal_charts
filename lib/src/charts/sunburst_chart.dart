@@ -150,11 +150,36 @@ class _SunburstChartState extends State<SunburstChart>
       innerRadiusRatio: widget.innerRadiusRatio,
     );
 
-    if (index == null) return;
+    if (index == null) {
+      if (_highlightedIndex != null || _isCenterHovered) {
+        setState(() {
+          _highlightedIndex = null;
+          _isCenterHovered = false;
+        });
+        _removeTooltip();
+      }
+      return;
+    }
 
     if (index == -1) {
       _drillUp();
       return;
+    }
+
+    final renderBox = context.findRenderObject() as RenderBox?;
+    if (renderBox != null) {
+      _mouseGlobalPosition = renderBox.localToGlobal(details.localPosition);
+    }
+
+    if (index != _highlightedIndex) {
+      setState(() {
+        _highlightedIndex = index;
+        _isCenterHovered = false;
+      });
+
+      if (widget.showTooltip) {
+        _showTooltip(_segments[index]);
+      }
     }
 
     final tappedSegment = _segments[index];

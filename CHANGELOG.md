@@ -1,3 +1,13 @@
+## 0.2.0
+
+* Add tap-based tooltip and highlight for all chart types on iOS/touch devices.
+* Fix BarChart hit test accuracy by passing full layout parameters (yScale, unit, valueScale, etc.).
+* Add `TextDecoration.none` to tooltip text styles to prevent unwanted underlines on iOS.
+
+## 0.1.3
+
+* Add dynamic axis label sizing and X-axis label rotation for BarChart.
+
 ## 0.1.2
 
 * Change calendar heatmap month selector labels from English abbreviations (Jan–Dec) to numeric (1–12).

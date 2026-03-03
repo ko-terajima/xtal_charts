@@ -6,11 +6,7 @@ class ChartDataPoint {
   final double y;
   final String? label;
 
-  const ChartDataPoint({
-    required this.x,
-    required this.y,
-    this.label,
-  });
+  const ChartDataPoint({required this.x, required this.y, this.label});
 }
 
 /// A single data series to display on a chart.

@@ -293,8 +293,6 @@ class _DualAxesChartState extends State<DualAxesChart>
   // --- Tap handling ---
 
   void _handleTapDown(TapDownDetails details, Size size) {
-    if (widget.onElementTap == null) return;
-
     final index = hitTestDualAxes(
       localPosition: details.localPosition,
       size: size,
@@ -305,14 +303,32 @@ class _DualAxesChartState extends State<DualAxesChart>
       leftYAxisTitle: widget.leftYAxisTitle,
       rightYAxisTitle: widget.rightYAxisTitle,
     );
-    if (index == null) return;
 
-    widget.onElementTap!(
-      index,
-      _xLabelAt(index),
-      _leftValuesAt(index),
-      _rightValuesAt(index),
-    );
+    final renderBox = context.findRenderObject() as RenderBox?;
+    if (renderBox != null) {
+      _mouseGlobalPosition = renderBox.localToGlobal(details.localPosition);
+    }
+
+    if (index != _hoveredXIndex) {
+      setState(() => _hoveredXIndex = index);
+
+      if (widget.showTooltip) {
+        if (index != null) {
+          _showTooltip(index);
+        } else {
+          _removeTooltip();
+        }
+      }
+    }
+
+    if (index != null) {
+      widget.onElementTap?.call(
+        index,
+        _xLabelAt(index),
+        _leftValuesAt(index),
+        _rightValuesAt(index),
+      );
+    }
   }
 
   // --- Tooltip ---

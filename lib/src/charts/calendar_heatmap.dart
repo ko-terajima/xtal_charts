@@ -263,18 +263,39 @@ class _CalendarHeatmapState extends State<CalendarHeatmap>
     int year,
     int month,
   ) {
-    if (widget.onDateTap == null) return;
-
     final weeks = _getWeeks(year, month);
     final hitDate = hitTestCalendarCell(
       localPosition: details.localPosition,
       size: canvasSize,
       weeks: weeks,
     );
-    if (hitDate == null) return;
 
-    final value = widget.data.valueOf(hitDate);
-    widget.onDateTap!(hitDate, value);
+    _mouseGlobalPosition = details.globalPosition;
+
+    final isSameCell =
+        _hoveredDate != null &&
+        hitDate != null &&
+        _hoveredDate!.year == hitDate.year &&
+        _hoveredDate!.month == hitDate.month &&
+        _hoveredDate!.day == hitDate.day;
+
+    if (!isSameCell) {
+      setState(() => _hoveredDate = hitDate);
+
+      if (widget.showTooltip) {
+        if (hitDate != null) {
+          final value = widget.data.valueOf(hitDate);
+          _showTooltip(date: hitDate, value: value);
+        } else {
+          _removeTooltip();
+        }
+      }
+    }
+
+    if (hitDate != null) {
+      final value = widget.data.valueOf(hitDate);
+      widget.onDateTap?.call(hitDate, value);
+    }
   }
 
   void _showTooltip({required DateTime date, required double? value}) {

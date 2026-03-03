@@ -252,8 +252,6 @@ class _BarChartState extends State<BarChart>
   // --- Tap handling ---
 
   void _handleTapDown(TapDownDetails details, Size size) {
-    if (widget.onElementTap == null) return;
-
     final hitResult = hitTestBarChart(
       localPosition: details.localPosition,
       size: size,
@@ -261,20 +259,51 @@ class _BarChartState extends State<BarChart>
       theme: widget.theme,
       xAxisTitle: widget.xAxisTitle,
       yAxisTitle: widget.yAxisTitle,
+      yScale: _yScale,
+      baseTextStyle: widget.textStyle,
+      unit: widget.unit,
+      unitPosition: widget.unitPosition,
+      valueScale: widget.valueScale,
+      useThousandsSeparator: widget.useThousandsSeparator,
+      rotateXAxisLabels: widget.rotateXAxisLabels,
     );
-    if (hitResult == null) return;
 
-    final catIdx = hitResult.categoryIndex;
-    final serIdx = hitResult.seriesIndex;
-    final series = widget.seriesList[serIdx];
+    final renderBox = context.findRenderObject() as RenderBox?;
+    if (renderBox != null) {
+      _mouseGlobalPosition = renderBox.localToGlobal(details.localPosition);
+    }
 
-    widget.onElementTap!(
-      catIdx,
-      serIdx,
-      _categoryLabelAt(catIdx),
-      series.name,
-      series.dataPoints[catIdx].y,
-    );
+    final newCatIdx = hitResult?.categoryIndex;
+    final newSerIdx = hitResult?.seriesIndex;
+
+    if (newCatIdx != _hoveredCategoryIndex ||
+        newSerIdx != _hoveredSeriesIndex) {
+      setState(() {
+        _hoveredCategoryIndex = newCatIdx;
+        _hoveredSeriesIndex = newSerIdx;
+      });
+
+      if (widget.showTooltip) {
+        if (newCatIdx != null) {
+          _showTooltip(newCatIdx);
+        } else {
+          _removeTooltip();
+        }
+      }
+    }
+
+    if (hitResult != null) {
+      final catIdx = hitResult.categoryIndex;
+      final serIdx = hitResult.seriesIndex;
+      final series = widget.seriesList[serIdx];
+      widget.onElementTap?.call(
+        catIdx,
+        serIdx,
+        _categoryLabelAt(catIdx),
+        series.name,
+        series.dataPoints[catIdx].y,
+      );
+    }
   }
 
   // --- Tooltip ---

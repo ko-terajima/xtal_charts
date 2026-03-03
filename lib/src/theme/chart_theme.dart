@@ -219,10 +219,12 @@ class ChartTheme {
       fontSize: 13,
       fontWeight: FontWeight.bold,
       color: Colors.white,
+      decoration: TextDecoration.none,
     ),
     this.tooltipValueStyle = const TextStyle(
       fontSize: 12,
       color: Color(0xCCFFFFFF),
+      decoration: TextDecoration.none,
     ),
     this.tooltipBorderRadius = 8.0,
     this.tooltipPadding = const EdgeInsets.symmetric(
@@ -312,10 +314,12 @@ class ChartTheme {
       fontSize: 13,
       fontWeight: FontWeight.bold,
       color: Colors.white,
+      decoration: TextDecoration.none,
     ),
     tooltipValueStyle: TextStyle(
       fontSize: 12,
       color: Color(0xCCFFFFFF),
+      decoration: TextDecoration.none,
     ),
     tooltipBorderRadius: 10.0,
     tooltipPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 10),

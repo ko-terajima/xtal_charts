@@ -242,8 +242,6 @@ class _AreaChartState extends State<AreaChart>
   // --- Tap handling ---
 
   void _handleTapDown(TapDownDetails details, Size size) {
-    if (widget.onElementTap == null) return;
-
     final index = hitTestAreaChart(
       localPosition: details.localPosition,
       size: size,
@@ -252,9 +250,27 @@ class _AreaChartState extends State<AreaChart>
       xAxisTitle: widget.xAxisTitle,
       yAxisTitle: widget.yAxisTitle,
     );
-    if (index == null) return;
 
-    widget.onElementTap!(index, _xLabelAt(index), _seriesValuesAt(index));
+    final renderBox = context.findRenderObject() as RenderBox?;
+    if (renderBox != null) {
+      _mouseGlobalPosition = renderBox.localToGlobal(details.localPosition);
+    }
+
+    if (index != _hoveredXIndex) {
+      setState(() => _hoveredXIndex = index);
+
+      if (widget.showTooltip) {
+        if (index != null) {
+          _showTooltip(index);
+        } else {
+          _removeTooltip();
+        }
+      }
+    }
+
+    if (index != null) {
+      widget.onElementTap?.call(index, _xLabelAt(index), _seriesValuesAt(index));
+    }
   }
 
   // --- Tooltip ---

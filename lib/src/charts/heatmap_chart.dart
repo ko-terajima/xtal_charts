@@ -247,8 +247,6 @@ class _HeatmapChartState extends State<HeatmapChart>
   // --- Tap handling ---
 
   void _handleTapDown(TapDownDetails details, Size size) {
-    if (widget.onElementTap == null) return;
-
     final hitResult = hitTestHeatmap(
       localPosition: details.localPosition,
       size: size,
@@ -258,28 +256,52 @@ class _HeatmapChartState extends State<HeatmapChart>
       xAxisTitle: widget.xAxisTitle,
       yAxisTitle: widget.yAxisTitle,
     );
-    if (hitResult == null) return;
 
-    final xIdx = hitResult.xIndex;
-    final yIdx = hitResult.yIndex;
-    final value = widget.data.values[yIdx][xIdx];
-    if (value == null) return;
+    final renderBox = context.findRenderObject() as RenderBox?;
+    if (renderBox != null) {
+      _mouseGlobalPosition = renderBox.localToGlobal(details.localPosition);
+    }
 
-    final colorScale = _effectiveColorScale;
-    final vMin = _effectiveValueMin;
-    final vMax = _effectiveValueMax;
-    final range = vMax - vMin;
-    final normalizedValue = range > 0 ? (value - vMin) / range : 0.5;
-    final cellColor = colorScale.colorAt(normalizedValue);
+    final newXIdx = hitResult?.xIndex;
+    final newYIdx = hitResult?.yIndex;
 
-    widget.onElementTap!(
-      xIdx,
-      yIdx,
-      widget.data.xCategories[xIdx],
-      widget.data.yCategories[yIdx],
-      value,
-      cellColor,
-    );
+    if (newXIdx != _hoveredXIndex || newYIdx != _hoveredYIndex) {
+      setState(() {
+        _hoveredXIndex = newXIdx;
+        _hoveredYIndex = newYIdx;
+      });
+
+      if (widget.showTooltip) {
+        if (newXIdx != null && newYIdx != null) {
+          _showTooltip(xIndex: newXIdx, yIndex: newYIdx);
+        } else {
+          _removeTooltip();
+        }
+      }
+    }
+
+    if (hitResult != null) {
+      final xIdx = hitResult.xIndex;
+      final yIdx = hitResult.yIndex;
+      final value = widget.data.values[yIdx][xIdx];
+      if (value != null && widget.onElementTap != null) {
+        final colorScale = _effectiveColorScale;
+        final vMin = _effectiveValueMin;
+        final vMax = _effectiveValueMax;
+        final range = vMax - vMin;
+        final normalizedValue = range > 0 ? (value - vMin) / range : 0.5;
+        final cellColor = colorScale.colorAt(normalizedValue);
+
+        widget.onElementTap!(
+          xIdx,
+          yIdx,
+          widget.data.xCategories[xIdx],
+          widget.data.yCategories[yIdx],
+          value,
+          cellColor,
+        );
+      }
+    }
   }
 
   // --- Tooltip ---

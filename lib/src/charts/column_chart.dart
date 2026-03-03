@@ -280,7 +280,7 @@ class _ColumnChartState extends State<ColumnChart>
   // --- Tap handling ---
 
   void _handleTapDown(TapDownDetails details, Size size) {
-    if (_yScale == null || widget.onElementTap == null) return;
+    if (_yScale == null) return;
 
     final hitResult = hitTestColumnChart(
       localPosition: details.localPosition,
@@ -292,19 +292,43 @@ class _ColumnChartState extends State<ColumnChart>
       xAxisTitle: widget.xAxisTitle,
       yAxisTitle: widget.yAxisTitle,
     );
-    if (hitResult == null) return;
 
-    final catIdx = hitResult.categoryIndex;
-    final serIdx = hitResult.seriesIndex;
-    final series = widget.seriesList[serIdx];
+    final renderBox = context.findRenderObject() as RenderBox?;
+    if (renderBox != null) {
+      _mouseGlobalPosition = renderBox.localToGlobal(details.localPosition);
+    }
 
-    widget.onElementTap!(
-      catIdx,
-      serIdx,
-      _categoryLabelAt(catIdx),
-      series.name,
-      series.dataPoints[catIdx].y,
-    );
+    final newCatIdx = hitResult?.categoryIndex;
+    final newSerIdx = hitResult?.seriesIndex;
+
+    if (newCatIdx != _hoveredCategoryIndex ||
+        newSerIdx != _hoveredSeriesIndex) {
+      setState(() {
+        _hoveredCategoryIndex = newCatIdx;
+        _hoveredSeriesIndex = newSerIdx;
+      });
+
+      if (widget.showTooltip) {
+        if (newCatIdx != null) {
+          _showTooltip(newCatIdx);
+        } else {
+          _removeTooltip();
+        }
+      }
+    }
+
+    if (hitResult != null) {
+      final catIdx = hitResult.categoryIndex;
+      final serIdx = hitResult.seriesIndex;
+      final series = widget.seriesList[serIdx];
+      widget.onElementTap?.call(
+        catIdx,
+        serIdx,
+        _categoryLabelAt(catIdx),
+        series.name,
+        series.dataPoints[catIdx].y,
+      );
+    }
   }
 
   // --- Tooltip ---

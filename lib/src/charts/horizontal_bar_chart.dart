@@ -211,8 +211,6 @@ class _HorizontalBarChartState extends State<HorizontalBarChart>
   // --- Tap handling ---
 
   void _handleTapDown(TapDownDetails details, Size size) {
-    if (widget.onElementTap == null) return;
-
     final base = widget.textStyle ?? widget.theme.textStyle;
     final hitResult = hitTestHorizontalBarChart(
       localPosition: details.localPosition,
@@ -226,13 +224,33 @@ class _HorizontalBarChartState extends State<HorizontalBarChart>
       resolvedLabelStyle: base?.merge(widget.theme.labelStyle),
       resolvedValueLabelStyle: base?.merge(widget.theme.horizontalBarValueLabelStyle),
     );
-    if (hitResult == null) return;
 
-    final series = widget.seriesList[hitResult];
-    final value = series.dataPoints.isNotEmpty
-        ? series.dataPoints.first.y
-        : 0.0;
-    widget.onElementTap!(hitResult, series.name, value);
+    final renderBox = context.findRenderObject() as RenderBox?;
+    if (renderBox != null) {
+      _mouseGlobalPosition = renderBox.localToGlobal(details.localPosition);
+    }
+
+    if (hitResult != _hoveredBarIndex) {
+      setState(() {
+        _hoveredBarIndex = hitResult;
+      });
+
+      if (widget.showTooltip) {
+        if (hitResult != null) {
+          _showTooltip(hitResult);
+        } else {
+          _removeTooltip();
+        }
+      }
+    }
+
+    if (hitResult != null) {
+      final series = widget.seriesList[hitResult];
+      final value = series.dataPoints.isNotEmpty
+          ? series.dataPoints.first.y
+          : 0.0;
+      widget.onElementTap?.call(hitResult, series.name, value);
+    }
   }
 
   // --- Tooltip ---
